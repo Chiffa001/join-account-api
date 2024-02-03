@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { GracefulShutdownModule } from 'nestjs-graceful-shutdown';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoConfig } from './config/mongo.config';
 import { UserModule } from './user/user.module';
@@ -20,6 +21,7 @@ import { getTelegramConfig } from './config/telegram.config';
       inject: [ConfigService],
       useFactory: getTelegramConfig,
     }),
+    GracefulShutdownModule.forRoot(),
   ],
   controllers: [],
   providers: [],
