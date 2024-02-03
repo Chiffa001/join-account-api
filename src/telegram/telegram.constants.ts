@@ -1,0 +1,1 @@
+export const TELEGRAM_MODULE = 'TELEGRAM_MODULE';
