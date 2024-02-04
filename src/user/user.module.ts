@@ -17,5 +17,6 @@ import { UserModel } from './user.model';
       },
     ]),
   ],
+  exports: [UserService],
 })
 export class UserModule {}

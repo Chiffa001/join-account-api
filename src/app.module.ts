@@ -4,8 +4,10 @@ import { GracefulShutdownModule } from 'nestjs-graceful-shutdown';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { getMongoConfig } from './config/mongo.config';
 import { UserModule } from './user/user.module';
-import { TelegramModule } from './telegram/telegram.module';
 import { getTelegramConfig } from './config/telegram.config';
+import { TelegrafModule } from 'nestjs-telegraf';
+import { TelegramModule } from './telegram/telegram.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -16,12 +18,14 @@ import { getTelegramConfig } from './config/telegram.config';
       useFactory: getMongoConfig,
     }),
     UserModule,
-    TelegramModule.forRootAsync({
+    TelegrafModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: getTelegramConfig,
     }),
+    TelegramModule,
     GracefulShutdownModule.forRoot(),
+    TransactionModule,
   ],
   controllers: [],
   providers: [],
