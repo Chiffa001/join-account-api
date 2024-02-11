@@ -1,11 +1,12 @@
 import { ConfigService } from '@nestjs/config';
-import { TelegramOptions } from 'src/types/telegram';
+import { TelegrafModuleOptions } from 'nestjs-telegraf';
+import { session } from 'telegraf';
 
 export const getTelegramConfig = (
   configService: ConfigService,
-): TelegramOptions => {
+): TelegrafModuleOptions => {
   return {
     token: configService.getOrThrow('TG_TOKEN'),
-    chatId: configService.getOrThrow('TG_CHAT_ID'),
+    middlewares: [session()],
   };
 };
